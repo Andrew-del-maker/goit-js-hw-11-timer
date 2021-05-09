@@ -11,26 +11,21 @@ class CountdownTimer{
       let now = new Date();
       return this.targetDate - now;
     }
-}
-
-const timerDate = new CountdownTimer(new Date('Jul 17, 2021'), '#timer-1');
-
-function getTimer(){
-    let days = Math.floor(timerDate.time / (1000 * 60 * 60 * 24));
+    getTimer(){
+    let days = Math.floor(this.time / (1000 * 60 * 60 * 24));
     days = days < 10 ? '0' + days : days;
 
-    let hours = Math.floor((timerDate.time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let hours = Math.floor((this.time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     hours = hours < 10 ? '0' + hours : hours;
     
-    let mins = Math.floor((timerDate.time % (1000 * 60 * 60)) / (1000 * 60));
+    let mins = Math.floor((this.time % (1000 * 60 * 60)) / (1000 * 60));
     mins = mins < 10 ? '0' + mins : mins;
     
-    let secs = Math.floor((timerDate.time % (1000 * 60)) / 1000);
+    let secs = Math.floor((this.time % (1000 * 60)) / 1000);
     secs = secs < 10 ? '0' + secs : secs;
     
-    const selector = document.querySelector('#timer-1');
+    const selector = document.querySelector(`${this.selector}`);
     const spanEls = selector.querySelectorAll('.value');
-    //const spanEls = document.querySelectorAll('.value');
     spanEls.forEach(item => {
         if (item.dataset.value === 'days') {
             item.innerHTML = days;
@@ -46,8 +41,16 @@ function getTimer(){
         }
     }) 
 }
-getTimer();
-setInterval(getTimer, 1000);
+}
+
+const timerDate = new CountdownTimer(new Date('Jul 17, 2021'), '#timer-1');
+
+
+setInterval(() => {
+    timerDate.getTimer();
+}, 1000);
+
+
 
 
 
