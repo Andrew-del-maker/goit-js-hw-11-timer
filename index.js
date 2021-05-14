@@ -3,6 +3,8 @@ class CountdownTimer{
     constructor(targetDate,selector) {
         this.targetDate = targetDate;
         this.selector = selector;
+        this.getTimer();
+
     }
     get time() {
         return this.calcTimer();
@@ -50,7 +52,7 @@ class CountdownTimer{
 
 const timerDate = new CountdownTimer(new Date('Jul 17, 2021'), '#timer-1');
 
-timerDate.getTimer();
+
  
 
 
